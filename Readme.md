@@ -12,9 +12,9 @@ Each folder is organized as follows:
 * **crowdsourcing.py** contains the class definition for a Crowdsourcing object, which is characterized by the decision-making function implementation.
 * **crowdsourcing.py** contains the main script to test the crowdsourcing algorithm on the corresponding scenario.
 * **utility.py** contains utility functions such as reward functions, rerouting functions etc.
-* **create_behaviors.ipynb** is the Jupiter Notebook that creates the target behaviors for the crowdsourcing algorithm.
-* **Simulationlauncher.ipynb** is the Jupiter Notebook that creates the controlled and uncontrolled cars sets and run simulations in SUMO.
-* **plots.ipynb** is the Jupiter Notebook that allow to obtain diagrams and evaluation metrics to validate the crowdsourcing algorithm.
+* **create_behaviors.ipynb** is the Jupyter Notebook that creates the target behaviors for the crowdsourcing algorithm.
+* **Simulationlauncher.ipynb** is the Jupyter Notebook that creates the controlled and uncontrolled cars sets and run simulations in SUMO.
+* **plots.ipynb** is the Jupyter Notebook that allow to obtain diagrams and evaluation metrics to validate the crowdsourcing algorithm.
 
 ## How to use:
 
