@@ -10,7 +10,7 @@ Each folder is organized as follows:
 
 * **agent.py** contains the class definition for an Agent object (the term agent refers to the controlled car by control algorithm).
 * **crowdsourcing.py** contains the class definition for a Crowdsourcing object, which is characterized by the decision-making function implementation.
-* **crowdsourcing.py** contains the main script to test the crowdsourcing algorithm on the corresponding scenario.
+* **demo_crowds.py** contains the main script to test the crowdsourcing algorithm on the corresponding scenario.
 * **utility.py** contains utility functions such as reward functions, rerouting functions etc.
 * **create_behaviors.ipynb** is the Jupyter Notebook that creates the target behaviors for the crowdsourcing algorithm.
 * **Simulationlauncher.ipynb** is the Jupyter Notebook that creates the controlled and uncontrolled cars sets and run simulations in SUMO.
