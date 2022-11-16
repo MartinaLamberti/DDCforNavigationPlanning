@@ -99,7 +99,7 @@ def update_parking_reward(parkings,edge_list,edge_dict, number_lots):
 def update_pedestrians_reward(edge_list, parkings, step):
     # Remark: the reward fuction is alpha*pow(pR,2) + beta*pow(tR,2) + gamma*pow(pedR,2)
     # pedR is the component referred to pedestrians. 
-    #High reward for low-density (or density equal to 0) edges, density in percentage terms for crowded streets
+    #High reward for low-density (or density equal to 0) edges
     r = [0]*len(edge_list)
     if step>0:
         for i in range(len(edge_list)):
@@ -113,7 +113,7 @@ def update_pedestrians_reward(edge_list, parkings, step):
                     lane_length = traci.lane.getLength(lane_ID) 
                     density = pp_number/lane_length 
                 if (density*100 > 1):
-                    r[i] = density*100 #The higher the density, the lower the reward (PS: It was found that the density values were in the order of 10^-2.)
+                    r[i] = density #The higher the density, the lower the reward (PS: It was found that the density values were in the order of 10^-2.)
                 else: 
                     r[i] = 100 #Lower density (or no) edges will get higher rewards
     return(np.array(r))
@@ -122,7 +122,7 @@ def update_pedestrians_reward(edge_list, parkings, step):
 def update_traffic_reward(edge_list, parkings, step): 
     # Remark: the reward fuction is alpha*pow(pR,2) + beta*pow(tR,2) + gamma*pow(pedR,2)
     # tR is the component referred to traffic. 
-    #High reward for low-density (or density equal to 0) edges, density in percentage terms for busy streets
+    #High reward for low-density (or density equal to 0) edges
     r2 = [0]*len(edge_list)
     if step>0:
         for i in range(len(edge_list)):
@@ -136,7 +136,7 @@ def update_traffic_reward(edge_list, parkings, step):
                     lane_length = traci.lane.getLength(lane_ID)
                     density = (veh_number)/lane_length
                 if (density*100 > 1):
-                    r2[i] = density*100 
+                    r2[i] = density 
                 else: 
                     r2[i] = 100 
     return(np.array(r2))

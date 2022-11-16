@@ -194,7 +194,7 @@ if __name__ == "__main__":
                 desired_parking = parking_goals[agents[i].id_goal]
                 current_edge = traci.vehicle.getRoadID(agentID) #get current edge
                 
-                if traci.vehicle.isStoppedParking(agentID) == False:
+                if traci.vehicle.isStoppedParking(agentID) == False: #take evaluation metrics if the car is not parked
                     speed_meanagents[i].append(traci.vehicle.getSpeed(agentID))  #Speed profile logging for each agent
                     co2_meanagents[i].append(traci.vehicle.getCO2Emission(agentID))
                     co_meanagents[i].append(traci.vehicle.getCOEmission(agentID))

@@ -207,9 +207,7 @@ if __name__ == "__main__":
     traveltimeA = [0]*n_agents
     traveltimeF = [0]*n_foes
 
-
-
-    while len(getFreeParking(parkings, number_lots)) != 0 and  step < termination_steps:
+    while len(getFreeParking(parkings, number_lots)) != 0 and  step < termination_steps: 
 
         co2_agents.append(0)
         co_agents.append(0)
@@ -229,13 +227,13 @@ if __name__ == "__main__":
             
             agentID = "agent." + str(i)
             #for each agent I check if there is in the simulation:
-            if agentID in traci.vehicle.getIDList():#Could be replaced by 'for id in IDList'
+            if agentID in traci.vehicle.getIDList():
                 agentsMap += 1
                 desired_parking = parking_goals[agents[i].id_goal]
 
                 current_edge = traci.vehicle.getRoadID(agentID) #get current edge
                 
-                if traci.vehicle.isStoppedParking(agentID) == False:
+                if traci.vehicle.isStoppedParking(agentID) == False: #get evaluation metrics if it is not stopped at a parking lot
                     speed_meanagents[i].append(traci.vehicle.getSpeed(agentID))  
                     co2_meanagents[i].append(traci.vehicle.getCO2Emission(agentID))
                     co_meanagents[i].append(traci.vehicle.getCOEmission(agentID))
@@ -256,7 +254,7 @@ if __name__ == "__main__":
                     #FIRST CASE: THE PARKING LOT IS NOT FULL, SO THE AGENT CAN STOP
                     if current_edge in parkings and traci.parkingarea.getVehicleCount(parkings[current_edge])< number_lots[current_edge] and current_edge == desired_parking: 
                         traci.vehicle.setParkingAreaStop(agentID, parkings[current_edge], duration=lay_off)
-                        traveltimeA[i] = traci.vehicle.getTimeLoss(agentID)
+                        traveltimeA[i] = traci.vehicle.getTimeLoss(agentID) #get the time spent from when it is spawned into the simulation to when it parks.
                     
                     #OTHER CASES: YOU ARE NOT IN THE PARKING LOT OR THE PARKING LOT IS FULL -> decision-making loop to find next edge 
                     else: #DM loop
@@ -266,7 +264,7 @@ if __name__ == "__main__":
        
                         if len(successors) >1 or current_edge in ["50702263#3", "23653449#17", "23653449#18", "50733021#0", "671471170#2", "671188880#1", "50695151#1", "50695151#4", "677091106", "398058811", "50701873#0", "50701873#1", "766350959#2", "766511482#1", "668814536#0", "50701610#8", "531401290#0", "50706083#4", "93713834#0", "50793376#0", "50733593", "398055968#3", "50731850#0", "185483089#2", "185483089#5", "185483089#7", "185483089#14", "185483089#16", "185483089#20", "50733021#2", "766511481", "668814536#3"]:
                             new_state = crowds[i].receding_horizon_DM(statecars, tHor, state_space(statecars, tHor, edge_dictcars, netcars), r)
-                            #the new state is the result of crowdsourcing
+                            #the new state is the result of crowdsourcing if there is more than one successor or there are multiple lanes.
                             prox_edge = edge_dictcars[new_state]
                         
                         else: #the only successor will be the prox edge
@@ -368,7 +366,7 @@ if __name__ == "__main__":
         logs.append(remaining)
         print (f"simulation: {sys.argv[1]} - step: {step} - remaining: {remaining}")
 
-        for p in parkings:
+        for p in parkings: #counting controlled and uncontrolled cars
             parked_vehicles = traci.parkingarea.getVehicleIDs(parkings[p])
             for v in parked_vehicles:
                 if v.startswith("agent"):

@@ -35,7 +35,6 @@ total_cars = 30
 parkings = {'-906615585':'biblioteca', '-587489968#0':'terminal', '298563412':'multipiano'}
 number_lots = {'-906615585': 1, '-587489968#0':10, '298563412':10}
 parking_goals = {0:'-587489968#0', 1:'-906615585',2:'298563412'} # TERMINAL, BIBLIOTECA, MULTIPIANO
-badEdges = [] 
 termination_steps = 37000
 tHor = 5
 lay_off = 100000.0 #Very long layoff  
@@ -161,7 +160,7 @@ if __name__ == "__main__":
     
     past_edge = [traci.vehicle.getRoadID('agent.'+str(i)) for i in range(n_agents)]
     if initial_edge != "392822663" and initial_edge != "392822665#0" and initial_edge != "392822665#1" and initial_edge != "-79262633#16" and initial_edge != "-79262633#14" and initial_edge != "-79262633#8" and initial_edge != "-79262633#3" and initial_edge != "-79262633#0" and initial_edge!= "-587489968#1" and initial_edge!= "587489968#1": #sidewalks
-        traci.vehicle.moveToXY("agent.0", initial_edge, 0, x, y)
+        traci.vehicle.moveToXY("agent.0", initial_edge, 0, x, y) #edges are not sidewalks
         
     else:
         traci.vehicle.moveToXY("agent.0", initial_edge, 1, x, y)
@@ -182,9 +181,8 @@ if __name__ == "__main__":
         for i in range(n_agents):
             agentID = "agent." + str(i)
             #for each agent I check if there is in the simulation:
-            if agentID in traci.vehicle.getIDList():#Could be replaced by 'for id in IDList'
+            if agentID in traci.vehicle.getIDList():
                 desired_parking = parking_goals[agents[i].id_goal]
-                print(f"Desired parking of agent.0 is {parkings[desired_parking]} ")
                 # ----- BLUETOOTH -------------------# 
                 x, y = net.convertLonLat2XY(msg.lon, msg.lat) 
                 #print(f"Latitude: {msg.lat}, Longitude: {msg.lon}")
